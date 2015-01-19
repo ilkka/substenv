@@ -1,7 +1,11 @@
 package main
 
 import (
+    "bufio"
     "fmt"
+    "io"
+    "log"
+    "os"
     "gopkg.in/alecthomas/kingpin.v1"
 )
 
@@ -13,5 +17,16 @@ var (
 func main() {
     kingpin.Version("0.0.1")
     kingpin.Parse()
-    fmt.Printf("Hello, World!\n")
+
+    var bio = bufio.NewReader(os.Stdin)
+    for {
+        var line, _, err = bio.ReadLine()
+        if err != nil {
+            if err != io.EOF {
+                log.Fatal(err)
+            }
+            break
+        }
+        fmt.Printf("%s\n", line)
+    }
 }
