@@ -2,17 +2,16 @@ package main
 
 import (
     "fmt"
-    "os"
-    "github.com/codegangsta/cli"
+    "gopkg.in/alecthomas/kingpin.v1"
+)
+
+var (
+    app = kingpin.New("substenv", "Substitute environment variables into templates")
+    input = kingpin.Arg("input", "Input file or stdin if not given").File()
 )
 
 func main() {
-    app := cli.NewApp()
-    app.Name = "substenv"
-    app.Usage = "substitute environment variables into template"
-    app.Action = func(c *cli.Context) {
-        fmt.Printf("Hello, World!\n")
-    }
-
-    app.Run(os.Args)
+    kingpin.Version("0.0.1")
+    kingpin.Parse()
+    fmt.Printf("Hello, World!\n")
 }
