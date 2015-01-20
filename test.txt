@@ -1,0 +1,12 @@
+${FOO}
+$FOO
+foo ${FOO} bar
+${FOO} foo bar
+$
+${}
+foo ${BAR
+} BAZ
+${FOO}bar
+$FOObar
+bar$FOO
+bar${FOO}
