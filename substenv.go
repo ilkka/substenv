@@ -12,12 +12,12 @@ import (
 
 var (
     app = kingpin.New("substenv", "Substitute environment variables into templates")
-    expandFlag = app.Flag("expandenv", "Use os.ExpandEnv").Short('e').Bool()
+    regexParserFlag = app.Flag("regex", "Use slower but less greedy regex parser").Short('r').Bool()
     input = app.Arg("input", "Input file or stdin if not given").File()
     re = regexp.MustCompile(`\$(?:\{([A-Z][A-Z0-9_]*)\}|([A-Z][A-Z0-9_]*)\b)`)
 )
 
-func Template(line string) string {
+func RegexParserExpand(line string) string {
     var output = ""
     var nextIncludedIndex = 0
     matches := re.FindAllStringSubmatchIndex(line, -1)
@@ -52,10 +52,10 @@ func main() {
             break
         }
         var out = ""
-        if *expandFlag {
-            out = os.ExpandEnv(line)
+        if *regexParserFlag {
+            out = RegexParserExpand(line)
         } else {
-            out = Template(line)
+            out = os.ExpandEnv(line)
         }
         fmt.Printf("%s", out)
     }
