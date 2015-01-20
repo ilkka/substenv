@@ -10,3 +10,4 @@ ${FOO}bar
 $FOObar
 bar$FOO
 bar${FOO}
+foo${FOO}bar${BAR}
