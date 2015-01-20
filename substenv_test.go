@@ -1,4 +1,4 @@
-package substenv
+package main
 
 import (
     "fmt"
