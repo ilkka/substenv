@@ -1,4 +1,4 @@
-package main
+package substenv
 
 import (
     "bufio"
@@ -17,7 +17,7 @@ var (
     re = regexp.MustCompile(`\$(?:\{([A-Z][A-Z0-9_]*)\}|([A-Z][A-Z0-9_]*)\b)`)
 )
 
-func template(line string) string {
+func Template(line string) string {
     var output = ""
     var nextIncludedIndex = 0
     matches := re.FindAllStringSubmatchIndex(line, -1)
@@ -55,7 +55,7 @@ func main() {
         if *expandFlag {
             out = os.ExpandEnv(line)
         } else {
-            out = template(line)
+            out = Template(line)
         }
         fmt.Printf("%s", out)
     }
