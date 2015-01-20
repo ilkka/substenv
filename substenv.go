@@ -12,6 +12,7 @@ import (
 
 var (
     app = kingpin.New("substenv", "Substitute environment variables into templates")
+    expandFlag = app.Flag("expandenv", "Use os.ExpandEnv").Short('e').Bool()
     input = app.Arg("input", "Input file or stdin if not given").File()
     re = regexp.MustCompile(`\$(?:\{([A-Z][A-Z0-9_]*)\}|([A-Z][A-Z0-9_]*)\b)`)
 )
@@ -50,6 +51,12 @@ func main() {
             }
             break
         }
-        fmt.Printf("%s", template(line))
+        var out = ""
+        if *expandFlag {
+            out = os.ExpandEnv(line)
+        } else {
+            out = template(line)
+        }
+        fmt.Printf("%s", out)
     }
 }
