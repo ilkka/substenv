@@ -38,8 +38,8 @@ func template(line string) string {
 }
 
 func main() {
-    kingpin.Version("0.0.1")
-    kingpin.Parse()
+    app.Version("0.0.1")
+    app.Parse(os.Args[1:])
 
     var bio = bufio.NewReader(os.Stdin)
     for {
