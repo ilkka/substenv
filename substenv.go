@@ -39,7 +39,7 @@ func RegexParserExpand(line string) string {
 }
 
 func main() {
-    app.Version("0.0.1")
+    app.Version("1.0.0")
     app.Parse(os.Args[1:])
 
     var bio = bufio.NewReader(os.Stdin)
