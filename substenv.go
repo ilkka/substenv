@@ -41,8 +41,11 @@ func RegexParserExpand(line string) string {
 func main() {
     app.Version("1.0.0")
     app.Parse(os.Args[1:])
-
-    var bio = bufio.NewReader(os.Stdin)
+    var file = os.Stdin
+    if *input != nil {
+        file = *input
+    }
+    var bio = bufio.NewReader(file)
     for {
         var line, err = bio.ReadString('\n')
         if err != nil {
